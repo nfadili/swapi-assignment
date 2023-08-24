@@ -11,7 +11,7 @@ function App() {
             </Box>
             <Box>
                 {error && <Typography>{error}</Typography>}
-                {loading ? (
+                {loading || data === null ? (
                     <LinearProgress />
                 ) : (
                     <CostChart
