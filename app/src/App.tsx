@@ -5,8 +5,8 @@ import { useCostAggregate } from './hooks/useCostAggregate';
 function App() {
     const { loading, error, data } = useCostAggregate();
     return (
-        <Container>
-            <Box>
+        <Container sx={{ mt: 4 }}>
+            <Box sx={{ mb: 2 }}>
                 <Typography variant="h3">Starship Costs</Typography>
             </Box>
             <Box>
