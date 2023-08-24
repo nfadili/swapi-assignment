@@ -1,4 +1,5 @@
-import _axios, { Axios } from 'axios';
+import _axios, { AxiosInstance } from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 
 export type PagedDataResult<T> = {
     count: number;
@@ -46,7 +47,7 @@ export type Starship = {
 };
 
 export class Swapi {
-    private axios: Axios;
+    private axios: AxiosInstance;
     private baseUrl = 'https://swapi.dev/api';
     private pageMax = 10;
 
@@ -54,6 +55,7 @@ export class Swapi {
         this.axios = _axios.create({
             baseURL: this.baseUrl
         });
+        setupCache(this.axios);
     }
 
     /**
