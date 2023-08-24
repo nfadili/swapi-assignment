@@ -10,8 +10,9 @@ function App() {
                 <Typography variant="h3">Starship Costs</Typography>
             </Box>
             <Box>
-                {error && <Typography>{error}</Typography>}
-                {loading || data === null ? (
+                {error ? (
+                    <Typography>{error}</Typography>
+                ) : loading || data === null ? (
                     <LinearProgress />
                 ) : (
                     <CostChart

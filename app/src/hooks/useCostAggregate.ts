@@ -33,7 +33,7 @@ export const useCostAggregate = () => {
                 console.error(error);
                 setResults({
                     loading: false,
-                    error: 'Failed to fetch cost data',
+                    error: 'Failed to fetch cost data. Are you sure the API is running? :)',
                     data: null
                 });
             });
