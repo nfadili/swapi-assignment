@@ -1,51 +1,33 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, LinearProgress, Typography } from '@mui/material';
 import { CostChart } from './components/CostChart';
-
-const aggregate_data = [
-    {
-        id: 'All Starships',
-        color: '#b63d42',
-        data: [
-            {
-                x: '1',
-                y: 171
-            },
-            {
-                x: '2',
-                y: 202
-            },
-            {
-                x: '3',
-                y: 255
-            },
-            {
-                x: '4',
-                y: 70
-            },
-            {
-                x: '5',
-                y: 73
-            },
-            {
-                x: '6',
-                y: 115
-            },
-            {
-                x: '7',
-                y: 58
-            }
-        ]
-    }
-];
+import { useCostAggregate } from './hooks/useCostAggregate';
 
 function App() {
+    const { loading, error, data } = useCostAggregate();
     return (
         <Container>
             <Box>
                 <Typography variant="h3">Starship Costs</Typography>
             </Box>
             <Box>
-                <CostChart data={aggregate_data} />
+                {error && <Typography>{error}</Typography>}
+                {loading ? (
+                    <LinearProgress />
+                ) : (
+                    <CostChart
+                        data={[
+                            {
+                                id: 'Starship Cost by Film',
+                                color: '#b63d42',
+                                data:
+                                    data?.map((d) => ({
+                                        x: d.x,
+                                        y: d.y
+                                    })) ?? []
+                            }
+                        ]}
+                    />
+                )}
             </Box>
         </Container>
     );

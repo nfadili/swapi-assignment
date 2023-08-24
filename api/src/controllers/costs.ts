@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Starship, Swapi } from '../swapi';
+import { Swapi } from '../swapi';
 import { groupStarshipsByFilm } from '../utils';
 
 export type CostAggregate = { x: string; y: number };
@@ -25,9 +25,11 @@ export const getAggregateCosts = async (req: Request, res: Response) => {
             data.push({ title, totalCost });
         }
 
-        return res.json(data);
+        return res
+            .status(200)
+            .json(data.map((d) => ({ x: d.title, y: d.totalCost })));
     } catch (error) {
         console.error(`There was an error fetching/processing data from SWAPI`);
-        return res.json({ error: 'intermittent SWAPI error ' });
+        return res.status(500).json({ error: 'intermittent SWAPI error ' });
     }
 };
